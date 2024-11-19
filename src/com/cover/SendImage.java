@@ -18,7 +18,6 @@ public class SendImage {
                     int rgb = image.getRGB(x, y);
                     Color color = new Color(rgb);
 
-                    // Création directe de la valeur RGB en hexa
                     hexArray[y][x] = (color.getRed() << 16) |
                             (color.getGreen() << 8) |
                             (color.getBlue());
@@ -30,7 +29,7 @@ public class SendImage {
                 fos.write(header);
                 for (int y = 0; y < 240; y++) {
                     for (int x = 0; x < 240; x++) {
-                        // Écriture des 3 octets RGB
+
                         int rgb = hexArray[y][x];
                         fos.write((rgb >> 16) & 0xFF); // R
                         fos.write((rgb >> 8) & 0xFF); // G
