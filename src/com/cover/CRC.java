@@ -34,6 +34,7 @@ public class CRC {
                 crc.update(buffer, 0, bytesRead);
             }
 
+            System.err.println(crc.getValue());
             return crc.getValue();
         }
     }

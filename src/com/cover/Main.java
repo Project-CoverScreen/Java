@@ -5,14 +5,9 @@ public class Main {
     public static void main(String[] args) {
 
         Resize resize = new Resize();
-        resize.Image();
+        resize.Image("test.jpeg", "eightbit.bmp");
         SendImage sendImage = new SendImage();
-        sendImage.sensImage();
-        // AsciiArt asciiArt = new AsciiArt();
-        // asciiArt.asciiArt();
-        CRC crc = new CRC();
-        System.err.println("CRC : " + crc.getCRCAsHex());
-
+        sendImage.sendImage("eightbit.bmp", "pixels.bin");
     }
 
 }
