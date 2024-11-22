@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.zip.CRC32;
 
 public class SendImage {
     public void sendImage(String in, String out) {
@@ -13,6 +14,7 @@ public class SendImage {
             BufferedImage image = ImageIO.read(new File(in));
             int[][] hexArray = new int[240][240];
             FileOutputStream fos = new FileOutputStream(out, false);
+            CRC32 crc = new CRC32();
             
             fos.write("PetitHeaderLoveU".getBytes());
             for (int y = 0; y < 240; y++) {
@@ -20,15 +22,20 @@ public class SendImage {
                     int rgb = image.getRGB(x, y);
                     //System.err.println(rgb);
                     Color color = new Color(rgb);
-                    System.err.println(color.getRed() + " " + color.getGreen() + " " + color.getBlue());
-                    
-                    hexArray[y][x] = (color.getRed() & 0xFF) << 16 |
-                    (color.getGreen() & 0xFF) << 8 |
-                    (color.getBlue() & 0xFF);
 
-                    fos.write((rgb >> 16) & 0xFF); // R
-                    fos.write((rgb >> 8) & 0xFF); // G
-                    fos.write(rgb & 0xFF); // B
+                    //rgb = (color.getRed() << 16) | (color.getGreen() << 8) | color.getBlue();
+                    int red = (color.getRed() >> 16) ;
+                    int green = (color.getGreen() >> 8);
+                    int blue = color.getBlue();
+                    if (x == 1 && y == 1) {
+                        System.err.println("red: " + red);
+                        System.err.println("green: " + green);
+                        System.err.println("blue: " + blue);
+                        
+                    }
+                    fos.write(red);
+                    fos.write(green);
+                    fos.write(blue);
                 }
             }
             fos.write("PetitFootercFini".getBytes());
