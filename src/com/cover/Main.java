@@ -5,6 +5,7 @@ public class Main {
     public static String Photo = "photo/";
     public static String Resize = "Resize/";
     public static String Bin = "Bin/";
+    public static String View = "View/";
 
     public static String jpeg = ".jpg";
     public static String bmp = ".bmp";
@@ -23,10 +24,9 @@ public class Main {
 
     public static void resizeImage() {
 
-            Resize resize = new Resize();
-            resize.Image((Photo + in + jpeg), (Resize + mid + bmp));
-            SendImage sendImage = new SendImage();
-            sendImage.sendImage((Resize + mid + bmp), (Bin + in + bin));
+        Resize resize = new Resize();
+        resize.Image((Photo + in + jpeg), (Resize + mid + bmp));
+        SendImage sendImage = new SendImage();
+        sendImage.sendImage((Resize + mid + bmp), (Bin + in + bin));
     }
-
 }
